@@ -3,7 +3,7 @@
 (leer esta guía en Español 🇪🇸)
 
 Some aspects to know before reading or following this guide:
-- All these steps has been tested in a fresh Vanilla OS installation in order to write this guide.
+- All these steps has been tested in a "out of the box" Vanilla OS installation in order to write this guide.
 - Some routes contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
     - For example, if a find the route `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name.
 
@@ -20,7 +20,7 @@ Table of contents:
 apx init --nix
 ```
 
-This will show this dialog before running the installation. Just press the `Y` key.
+This will show this dialog before running the installation. Just press the `Y` key (yes option).
 
 ```bash
 This will create a '.nix' folder in your home directory and set up some SystemD units to mount that folder at /nix before running the installation. Confirm 'y' to continue. [y/N]:
@@ -28,7 +28,8 @@ This will create a '.nix' folder in your home directory and set up some SystemD 
 
 When the installation has finished, it is necessary to reboot.
 
-(NO INCLUIR```
+(NO INCLUIR)
+```
 Installation finished!  To ensure that the necessary environment
 variables are set, either log in again, or type
 
@@ -36,7 +37,7 @@ variables are set, either log in again, or type
 
 in your shell.
  SUCCESS  Installation complete. Reboot to start using nix.
-```)
+```
 
 <br />
 
@@ -47,6 +48,22 @@ Realizado en VanillaOS, similar en otros entornos que utilizan Nix.
 
 Lo primero de todo, instalar home-manager: https://julianhofer.eu/blog/01-silverblue-nix/#home-manager
 - obtenido de: https://discord.com/channels/1023243680829681704/1097468317477912646/1097786733485101088
+
+```bash
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+```
+
+```bash
+nix-channel --update
+```
+
+```bash
+export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+```
+
+```bash
+nix-shell '<home-manager>' -A install
+```
 
 After installing Home Manager, this is shown in shell:
 
