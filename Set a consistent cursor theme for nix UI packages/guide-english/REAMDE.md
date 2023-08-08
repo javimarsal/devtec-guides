@@ -42,7 +42,7 @@ in your shell.
 
 <br />
 
-### Installing Home Manager
+## Installing Home Manager
 This project (Home Manager) provides a basic system for managing a user environment using the Nix package manager together with the Nix libraries found in Nixpkgs. It allows declarative configuration of user specific (non global) packages and dotfiles.
 
 Realizado en VanillaOS, similar en otros entornos que utilizan Nix.
@@ -83,7 +83,21 @@ This means that the `/home/[your-user-name]/.config/home-manager/home.nix` file 
 nano /home/[your-user-name]/.config/home-manager/home.nix
 ```
 
-This file can also be edited using the command `home-manager edit`, but the EDITOR variable must be recognize in order to execute that command. As this environment variable is not set on Vanilla OS, a quick solution would be to execute the command after setting the variable:
+## Setting cursor theme for Nix apps
+
+So now, let's set the configuration to show the same cursor theme as the system on (Adwaita by default) for Nix UI applications.
+
+As seen before, we need to edit this file:
+- `/home/[your-user-name]/.config/home-manager/home.nix`
+
+It can be edited using the nano editor, but by installing Home Manager this command is now available: `home-manager edit`
+
+If you try that, maybe a similar error to this will be shown:
+```bash
+Please set the $EDITOR environment variable
+```
+
+That means that the `EDITOR`` variable must be recognize in order to execute that command. As this environment variable is not set on Vanilla OS by default, a quick solution would be to execute the command after setting the variable temporarily:
 
 ```bash
 EDITOR=nano home-manager edit
@@ -132,20 +146,29 @@ home-manager switch
 
 HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita, ya que es el cursor que viene de base.
 
-## Configuración si queremos aplicar un cursor no instalado
+## Take into account
 
-Instalar bibata
+(This part of the guide is optional, but maybe you would like to know what it's about if this situation happens to you in the future)
+
+At this point, we have set the "Adwaita" cursor theme for Nix apps that use UI as audacity, discord, vscode, ... and everything looks good. We have achive the objective to have the same cursor theme in all our System.
+
+But this is working because the cursor theme we have set to Nix apps was exactly the same as the system one (Adwaita). So we have to take into account the following:
+- If we prefer another cursor theme (different the System's default) it will be necessary to change the cursor theme for both parts, Nix apps (done previously) and the System itself.
+
+So now, let's see an example where we are going to set the "Bibata Modern Ice" cursor theme across all the System.
+
+### Setting "Bibata Modern Ice" cursor theme for Nix apps
 
 ```bash
 { config, pkgs, ... }:
 
 {
 home.pointerCursor = {
-    name = "Bibata-Modern-Amber";
+    name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
   };
 
-  home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber";
+  home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
 }
 ```
 
@@ -159,15 +182,91 @@ And build and activate configuration:
 home-manager switch
 ```
 
+### Setting "Bibata Modern Ice" cursor theme for the System
+
+You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) cursor theme from [gnome-look.org](https://www.gnome-look.org). Just go to the "Files" section and download the "Bibata-Modern-Ice.tar.gz" file.
+
+<!-- TODO -->
+In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only, so...
+
+```bash
+cp -r Bibata-Modern-Ice /tmp
+```
+
+then
+
+```bash
+sudo abroot shell
+```
+
+This will request your password.
+
+(leer documentación para saber exactamente lo que hace el comando )
+This will be shown, it's just a warning because you are going to access ... and you will gain write permission on the System files. It can be done, but it isn't recommended.
+
+```bash
+===============================================================================
+PLEASE READ CAREFULLY BEFORE PROCEEDING
+===============================================================================
+Changes made in the shell will be applied to the future root on next boot on
+successful.
+Running a command in a transactional shell is meant to be used by advanced users
+for maintenance purposes.
+
+If you ended up here trying to install an application, consider using
+Flatpak/Appimage or Apx (apx install package) instead.
+
+Read more about ABRoot at [https://documentation.vanillaos.org/docs/ABRoot/].
+
+Are you sure you want to proceed? [y/N]:
+```
+
+Just press the `Y` key.
+
+Copy and paste the cursor theme folder from `tmp` to `/usr/share/icons`
+
+```bash
+cp -r /tmp/Bibata-Modern-Ice/ /usr/share/icons
+```
+
+And 
+```bash
+exit
+```
+
+Wait until the "bring back read only" process has finished and you will need to restart the System in order to apply these changes.
+
+Now you need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
 Install gnome-tweaks in order to select the cursor theme:
 
 (NO INSTALAR CON NIX, PROBAR EN EL CONTENEDOR DE APT)
+Funciona
 ```bash
 apx install --nix gnome.gnome-tweaks
 ```
 
-Remember that, in this case, we are applying the "Adwaita" theme, so the home-manager configuration (we did previously) should contain that theme.
+Funciona
+INTALAR SIN NIX
+```bash
+apx update
+```
 
+y
+
+```bash
+apx install gnome-tweaks
+```
+
+<!-- TODO -->
+Once we have installed "gnome-tweaks" app, we can proceed...
+
+Open "gnome-teaks" and change the cursor theme in the "Appearance" menu.
+
+<!-- TODO: Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
+
+
+<!-- TODO: To Change -->
+(Desactualizado, recuperar partes)
 ## Atención
 
 Al realizar esta configuración, por ejemplo, en gnome utilizando la aplicación gnome-tweaks, aparecen el resto de cursores del tema bibata, es decir, se han instalado desde los paquetes de Nix utilizando home-manager, pero al seleccionarlos desde gnome-tweaks (si no es el indicado según la configuración realizada) no surtirá efecto.
