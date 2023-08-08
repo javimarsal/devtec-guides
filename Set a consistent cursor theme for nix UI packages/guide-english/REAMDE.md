@@ -264,6 +264,13 @@ Open "gnome-teaks" and change the cursor theme in the "Appearance" menu.
 
 <!-- TODO: Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
 
+If you have some Vanilla OS containers running (arch, fedora, ...) maybe this configuration will not work if you have some apps already installed or you install some apps in the future on these containers.
+
+The solution I know is to reinitialize the containers in order to apply the cursor theme configuration.
+
+I don't if there's a better solution, but this is what I recommend to you.
+
+(Probar esto bien, mirar si al hacer esto, después cambiar cursor y ver si sigue funcionando)
 
 <!-- TODO: To Change -->
 (Desactualizado, recuperar partes)
