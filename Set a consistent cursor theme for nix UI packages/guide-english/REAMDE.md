@@ -19,6 +19,7 @@ Table of contents:
 ```bash
 apx init --nix
 ```
+Te pedirá tu contraseña.
 
 This will show this dialog before running the installation. Just press the `Y` key (yes option).
 
@@ -26,7 +27,7 @@ This will show this dialog before running the installation. Just press the `Y` k
 This will create a '.nix' folder in your home directory and set up some SystemD units to mount that folder at /nix before running the installation. Confirm 'y' to continue. [y/N]:
 ```
 
-When the installation has finished, it is necessary to reboot.
+When the installation has finished, it is necessary to reboot. Maybe the system will require your password in order to proceed.
 
 (NO INCLUIR)
 ```
@@ -113,27 +114,13 @@ The last piece of code contains the line `[CONTENT HERE]...`, this is where we m
 }
 ```
 
-Now, a breaf explanation is here:
+Now, a breaf explanation:
 - The first part corresponds to `home.pointerCursor` and it contains:
     - `name`, it is the name of the cursor theme.
     - `package`, it is the name of the package that contains the cursor theme. So if the package is not installed, Home Manager will it install it for us.
 - The second part beginning with `home.file` indicates the route of the cursor theme that we want to set.
 
-Here's another example to apply the "Bibata-Modern-Amber" theme from the "pkgs.bibata-cursors" package:
-
-```bash
-{
-    home.pointerCursor = {
-        name = "Bibata-Modern-Amber";
-        package = pkgs.bibata-cursors;
-    };
-    
-    home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber";
-}
-```
-
-
-To finish, downloads  the  Nix  expressions of all subscribed channels:
+Save and exit the file with `Ctrl` + `X`, `Y` (to save) and `enter` the save with the same name. To finish, downloads  the  Nix  expressions of all subscribed channels:
 ```bash
 nix-channel --update
 ```
@@ -143,13 +130,43 @@ And build and activate configuration:
 home-manager switch
 ```
 
+HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita, ya que es el cursor que viene de base.
 
-Install gnome-tweaks from Nix repositories:
+## Configuración si queremos aplicar un cursor no instalado
 
+Instalar bibata
+
+```bash
+{ config, pkgs, ... }:
+
+{
+home.pointerCursor = {
+    name = "Bibata-Modern-Amber";
+    package = pkgs.bibata-cursors;
+  };
+
+  home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber";
+}
+```
+
+y luego
+```bash
+nix-channel --update
+```
+
+And build and activate configuration:
+```bash
+home-manager switch
+```
+
+Install gnome-tweaks in order to select the cursor theme:
+
+(NO INSTALAR CON NIX, PROBAR EN EL CONTENEDOR DE APT)
 ```bash
 apx install --nix gnome.gnome-tweaks
 ```
 
+Remember that, in this case, we are applying the "Adwaita" theme, so the home-manager configuration (we did previously) should contain that theme.
 
 ## Atención
 
