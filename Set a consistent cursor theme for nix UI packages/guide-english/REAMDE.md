@@ -183,6 +183,8 @@ And build and activate configuration:
 home-manager switch
 ```
 
+If you had a Nix app opened during this process, maybe you won't see any change. So you have to close the Nix app and open it again to see that the configuration has been applied.
+
 ### Setting "Bibata Modern Ice" cursor theme for the System
 
 You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) cursor theme from [gnome-look.org](https://www.gnome-look.org). Just go to the "Files" section and download the "Bibata-Modern-Ice.tar.gz" file.
@@ -266,6 +268,7 @@ Open "gnome-teaks" and change the cursor theme in the "Appearance" menu.
 
 <!-- TODO: Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
 
+(specific to Vanilla OS)
 If you have some Vanilla OS containers running (arch, fedora, ...) maybe this configuration will not work if you have some apps already installed or you install some apps in the future on these containers.
 
 The solution I know is to reinitialize the containers in order to apply the cursor theme configuration.
@@ -274,7 +277,20 @@ I don't if there's a better solution, but this is what I recommend to you.
 
 (Probar esto bien, mirar si al hacer esto, después cambiar cursor y ver si sigue funcionando)
 
-Atención: si funciona después de instalar nuevas aplicaciones y sin reinicializar los contenedores
+**Atención**: si funciona después de instalar nuevas aplicaciones y sin reinicializar los contenedores (ahora no funciona)
+- Probar si es cosa de los contenedores de Vanilla OS
+    - En contenedores apt: si la app es instalada después de cambiar el tema de cursores desde gnome-tweaks, la app tendrá ese tema. Una vez instalada, si cambiamos el tema (desde gnome-tweaks) no se aplican los cambios a no ser que reinstalemos la aplicación.
+    - En otros contenedores como aur o dnf: se aplica el tema de cursores de la configuración realizada para Nix.
+- Esto no es un problema de la configuración, tiene que ver más bien con los contenedores de Vanilla OS (pero se puede arreglar?)
+<!-- TODO -->
+- Probar esto en una nueva imagen (VanillaOS-22-limpio 2)
+    - Instalar tema de cursores descargando el zip y aplicándolo desde gnome-tweaks.
+    - No configurar nada de nix.
+    - Mirar cómo se comporta con contenedores de apt y aur
+        - Aplicando el tema e instalar apps.
+        - Teniendo la app instalada y cambiar el tema.
+        - Hacer capturas y pasarlo por el discord de Vanilla.
+
 
 <!-- TODO: To Change -->
 (Desactualizado, recuperar partes)
@@ -285,7 +301,7 @@ Al realizar esta configuración, por ejemplo, en gnome utilizando la aplicación
 Algo similar ocurre con algunas aplicaciones flatpak, no es capaz de identificar el cursor seleccionado.
 
 Para solucionar esto, debemos instalar los cursores de forma convencional, es decir, añadirlos a la carpeta `/usr/share/icons`. Así se puede conseguir tener el mismo cursor tanto en el sistema como en aplicaciones flatpak y de la paquetería Nix. Incluso si se desea, ahora se puede elegir un cursor distinto para las aplicaciones Nix y otro distinto para el resto de aplicaciones (esta parte igual no la pongo).
-
+<!--  -->
 
 Si te gustó esta guía no dudes en dejar un comentario. También me gustaría saber si has tenido alguna dificultad, no entiendes algo o no te funciona. Así podré salvarle para mejorar esta guía 😉
 
