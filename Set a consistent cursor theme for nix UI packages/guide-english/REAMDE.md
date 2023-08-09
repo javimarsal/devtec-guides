@@ -4,6 +4,7 @@
 
 Some aspects to know before reading or following this guide:
 - All these steps has been tested in a "out of the box" Vanilla OS installation in order to write this guide.
+- As I just mentioned, I'm using Vanilla OS, so some parts might be different compared with others Linux distros. This parts are marked with `(specific to Vanilla OS)`.
 - Some routes contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
     - For example, if a find the route `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name.
 
@@ -12,9 +13,9 @@ Table of contents:
 
 <br />
 
-## Specific Vanilla OS Configuration
+<!-- ## Specific Vanilla OS Configuration -->
 
-### Initializing Nix
+## Initializing Nix (specific to Vanilla OS)
 
 ```bash
 apx init --nix
@@ -187,6 +188,7 @@ home-manager switch
 You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) cursor theme from [gnome-look.org](https://www.gnome-look.org). Just go to the "Files" section and download the "Bibata-Modern-Ice.tar.gz" file.
 
 <!-- TODO -->
+#### (specific to Vanilla OS)
 In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only, so...
 
 ```bash
@@ -272,6 +274,8 @@ I don't if there's a better solution, but this is what I recommend to you.
 
 (Probar esto bien, mirar si al hacer esto, después cambiar cursor y ver si sigue funcionando)
 
+Atención: si funciona después de instalar nuevas aplicaciones y sin reinicializar los contenedores
+
 <!-- TODO: To Change -->
 (Desactualizado, recuperar partes)
 ## Atención
@@ -282,6 +286,8 @@ Algo similar ocurre con algunas aplicaciones flatpak, no es capaz de identificar
 
 Para solucionar esto, debemos instalar los cursores de forma convencional, es decir, añadirlos a la carpeta `/usr/share/icons`. Así se puede conseguir tener el mismo cursor tanto en el sistema como en aplicaciones flatpak y de la paquetería Nix. Incluso si se desea, ahora se puede elegir un cursor distinto para las aplicaciones Nix y otro distinto para el resto de aplicaciones (esta parte igual no la pongo).
 
+
+Si te gustó esta guía no dudes en dejar un comentario. También me gustaría saber si has tenido alguna dificultad, no entiendes algo o no te funciona. Así podré salvarle para mejorar esta guía 😉
 
 ## References
 
