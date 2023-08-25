@@ -117,17 +117,41 @@ After opening the `home.nix` file with nano editor, we can see that its content 
 The last piece of code contains the line `[CONTENT HERE]...`, this is where we must add the following configuration and it can be placed at the end of the file, but inside the braces (`{ }`):
 
 ```bash
-{ config, pkgs, ... }:
+home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+};
 
-{
-    home.pointerCursor = {
-        name = "Adwaita";
-        package = pkgs.gnome.adwaita-icon-theme;
-    };
-
-    home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
-}
+home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
 ```
+
+Siguiendo este [enlace](https://nixos.wiki/wiki/Cursor_Themes) (prefireblemente y más fácil):
+```bash
+home.pointerCursor =
+    let
+      getFrom = url: hash: name: {
+          gtk.enable = true;
+          x11.enable = true;
+          name = name;
+          size = 48;
+          package =
+            pkgs.runCommand "moveUp" {} ''
+              mkdir -p $out/share/icons
+              ln -s ${pkgs.fetchzip {
+                url = url;
+                hash = hash;
+              }} $out/share/icons/${name}
+          '';
+        };
+    in
+      getFrom
+        "https://github.com/GNOME/adwaita-icon-theme/archive/refs/tags/43.tar.gz"
+        "sha256-N6GPlRqEmgoxW2hRnvUyXMkqaXaNZRNluBd7U0AUGRU="
+        "Adwaita";
+```
+
+Cursor (en la sección de "tags" y seleccionando la versión de gnome que tiene el SO): https://github.com/GNOME/adwaita-icon-theme/releases/tag/43
+
 
 Now, a breaf explanation:
 - The first part corresponds to `home.pointerCursor` and it contains:
@@ -161,16 +185,12 @@ So now, let's see an example where we are going to set the "Bibata Modern Ice" c
 ### Setting "Bibata Modern Ice" cursor theme for Nix apps
 
 ```bash
-{ config, pkgs, ... }:
-
-{
 home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
-  };
+};
 
-  home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
-}
+home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
 ```
 
 y luego
@@ -193,8 +213,13 @@ You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) c
 #### (specific to Vanilla OS)
 In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only, so...
 
+<!-- TODO cambiar a '~/.local/share/icons' -->
+<!-- crear directorio -->
+<!-- copiar carpeta del tema de iconos -->
+<!-- así no es necesario acceder al sistema con abroot ni reiniciar -->
+
 ```bash
-cp -r Bibata-Modern-Ice /tmp
+cp -r ./Bibata-Modern-Ice /tmp
 ```
 
 then
@@ -225,7 +250,7 @@ Read more about ABRoot at [https://documentation.vanillaos.org/docs/ABRoot/].
 Are you sure you want to proceed? [y/N]:
 ```
 
-Just press the `Y` key.
+Just press the `Y` key to proceed.
 
 Copy and paste the cursor theme folder from `tmp` to `/usr/share/icons`
 
@@ -282,7 +307,6 @@ I don't if there's a better solution, but this is what I recommend to you.
     - En contenedores apt: si la app es instalada después de cambiar el tema de cursores desde gnome-tweaks, la app tendrá ese tema. Una vez instalada, si cambiamos el tema (desde gnome-tweaks) no se aplican los cambios a no ser que reinstalemos la aplicación.
     - En otros contenedores como aur o dnf: se aplica el tema de cursores de la configuración realizada para Nix.
 - Esto no es un problema de la configuración, tiene que ver más bien con los contenedores de Vanilla OS (pero se puede arreglar?)
-<!-- TODO -->
 - Probar esto en una nueva imagen (VanillaOS-22-limpio 2)
     - Instalar tema de cursores descargando el zip y aplicándolo desde gnome-tweaks.
     - No configurar nada de nix.
@@ -290,6 +314,7 @@ I don't if there's a better solution, but this is what I recommend to you.
         - Aplicando el tema e instalar apps.
         - Teniendo la app instalada y cambiar el tema.
         - Hacer capturas y pasarlo por el discord de Vanilla.
+    - (No funciona)
 
 
 <!-- TODO: To Change -->
