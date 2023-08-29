@@ -73,6 +73,8 @@ export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/
 nix-shell '<home-manager>' -A install
 ```
 
+Don't worry about some red text, this is just some warnings of Nix (due to `optionsDocBook is deprecated since 23.11 and will be removed in 24.05`).
+
 <!-- TODO: no poner lo que sale en la terminal (resultado), sino explicarlo -->
 After installing Home Manager, this is shown in shell:
 
