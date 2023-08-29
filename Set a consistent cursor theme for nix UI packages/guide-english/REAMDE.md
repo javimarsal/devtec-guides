@@ -3,10 +3,10 @@
 (leer esta guía en Español 🇪🇸)
 
 Some aspects to know before reading or following this guide:
-- All these steps has been tested in a "out of the box" Vanilla OS installation in order to write this guide.
-- As I just mentioned, I'm using Vanilla OS, so some parts might be different compared with others Linux distros. This parts are marked with `(specific to Vanilla OS)`.
+- All these steps has been tested in an "out of the box" Vanilla OS installation.
+- As I just mentioned, I'm using Vanilla OS, so some parts might be different or not necessary to do in others Linux distros. This parts are marked with `(specific to Vanilla OS)`.
 - Some routes contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
-    - For example, if a find the route `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name.
+    - For example, if I find the route `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name on my computer.
 
 Table of contents:
 -
@@ -177,8 +177,8 @@ HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita,
 
 At this point, we have set the "Adwaita" cursor theme for Nix apps that use UI as audacity, discord, vscode, ... and everything looks good. We have achive the objective to have the same cursor theme in all our System.
 
-But this is working because the cursor theme we have set to Nix apps was exactly the same as the system one (Adwaita). So we have to take into account the following:
-- If we prefer another cursor theme (different the System's default) it will be necessary to change the cursor theme for both parts, Nix apps (done previously) and the System itself.
+But this is working because the cursor theme we have set to Nix apps was exactly the same as the system default one (Adwaita). So we have to take into account the following:
+- If we prefer another cursor theme (different to the System's default) it will be necessary to change the cursor theme for both parts, Nix apps (done previously) and the System itself.
 
 So now, let's see an example where we are going to set the "Bibata Modern Ice" cursor theme across all the System.
 
@@ -268,23 +268,18 @@ Wait until the "bring back read only" process has finished and you will need to 
 Now you need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
 Install gnome-tweaks in order to select the cursor theme:
 
-(NO INSTALAR CON NIX, PROBAR EN EL CONTENEDOR DE APT)
+This must be installed from nix repository. If you use this app from a different repository, you won't have the same result or it won't work.
+
+We could install this app using home-manager, but let's use this command to make it more simple:
+
 Funciona
 ```bash
 apx install --nix gnome.gnome-tweaks
 ```
 
-Funciona
-INTALAR SIN NIX
-```bash
-apx update
-```
+- We use `--nix` flag to specify the nix package manager.
+- To know the correct name for the package "gnome-tweaks" we can search for it [here](https://search.nixos.org/packages?channel=23.05&show=gnome.gnome-tweaks&from=0&size=50&sort=relevance&type=packages&query=gnome-tweaks).
 
-y
-
-```bash
-apx install gnome-tweaks
-```
 
 <!-- TODO -->
 Once we have installed "gnome-tweaks" app, we can proceed...
