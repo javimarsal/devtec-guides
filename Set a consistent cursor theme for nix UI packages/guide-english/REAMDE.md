@@ -2,20 +2,25 @@
 
 (leer esta guía en Español 🇪🇸)
 
+Table of contents:
+- Why this guide? (TODO)
+
 Some aspects to know before reading or following this guide:
 - All these steps has been tested in an "out of the box" Vanilla OS installation.
-- As I just mentioned, I'm using Vanilla OS, so some parts might be different or not necessary to do in others Linux distros. This parts are marked with `(specific to Vanilla OS)`.
-- Some routes contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
-    - For example, if I find the route `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name on my computer.
+- As I just mentioned, I'm using Vanilla OS, so some parts might be different or not necessary to do in other Linux distros. This parts are marked with `(specific to Vanilla OS)`.
+- Some paths contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
+    - For example, if I find the path `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name on my computer.
 
-Table of contents:
--
+The most part of the configuration is done using the terminal, specifically "Console" (the terminal emulator from GNOME), this is completly valid and the default one on Vanilla OS. So, keep your terminal opened and let's start with this guide!
 
 <br />
 
-<!-- ## Specific Vanilla OS Configuration -->
+<!-- TODO -->
+## Why this guide?
 
 ## Initializing Nix (specific to Vanilla OS)
+
+The first step is to initialize Nix. If you haven't do it before, 
 
 ```bash
 apx init --nix
@@ -59,6 +64,7 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 ```
 
+<!-- Si es necesario para encontrar los paquetes necesarios de Nix?? Buscar -->
 ```bash
 export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 ```
@@ -67,6 +73,7 @@ export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/
 nix-shell '<home-manager>' -A install
 ```
 
+<!-- TODO: no poner lo que sale en la terminal (resultado), sino explicarlo -->
 After installing Home Manager, this is shown in shell:
 
 ```bash
@@ -157,9 +164,9 @@ Now, a breaf explanation:
 - The first part corresponds to `home.pointerCursor` and it contains:
     - `name`, it is the name of the cursor theme.
     - `package`, it is the name of the package that contains the cursor theme. So if the package is not installed, Home Manager will it install it for us.
-- The second part beginning with `home.file` indicates the route of the cursor theme that we want to set.
+- The second part beginning with `home.file` indicates the path of the cursor theme that we want to set.
 
-Save and exit the file with `Ctrl` + `X`, `Y` (to save) and `enter` the save with the same name. To finish, downloads  the  Nix  expressions of all subscribed channels:
+Now press `Ctrl` + `O` and `enter` to save the file, and then `Ctrl` + `X` to exit the file. To finish, downloads  the  Nix expressions of all subscribed channels (it might no be necessary because we did it previously):
 ```bash
 nix-channel --update
 ```
