@@ -10,6 +10,8 @@ Some aspects to know before reading or following this guide:
 - As I just mentioned, I'm using Vanilla OS, so some parts might be different or not necessary to do in other Linux distros. This parts are marked with `(specific to Vanilla OS)`.
 - Some paths contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
     - For example, if I find the path `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name on my computer.
+- Other paths start with `~/` as `~/.local/share/icons`. The `~` symbol corresponds to `/home/[your-user-name]`.
+    - I think it is necessary to know, maybe you have learnt this right now!
 
 The most part of the configuration is done using the terminal, specifically "Console" (the terminal emulator from GNOME), this is completly valid and the default one on Vanilla OS. So, keep your terminal opened and let's start with this guide!
 
@@ -134,9 +136,11 @@ Siguiendo este [enlace](https://nixos.wiki/wiki/Cursor_Themes) (prefireblemente 
 home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
 ```
 
+<!-- esto ya no es necesario -->
 Cursor (en la sección de "tags" y seleccionando la versión de gnome que tiene el SO): https://github.com/GNOME/adwaita-icon-theme/releases/tag/43
+<!--  -->
 
-
+<!-- TODO: cambiar, ajustarlo a lo actual -->
 Now, a breaf explanation:
 - The first part corresponds to `home.pointerCursor` and it contains:
     - `name`, it is the name of the cursor theme.
@@ -193,66 +197,46 @@ You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) c
 
 <!-- TODO -->
 #### (specific to Vanilla OS)
-In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only, so...
+In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only. We could achive that by using the `abroot` command from Vanilla OS, but we would be not following their devs recommendation: "use only abroot if you are an advanced user and if what you want to do can't be done in a different way".
+
+So yeah, we can do it in a different way without writing in the System files. Instead of copying the cursor theme to that path, we will copy it to `~/.local/share/icons`.
 
 <!-- TODO cambiar a '~/.local/share/icons' -->
 <!-- crear directorio -->
 <!-- copiar carpeta del tema de iconos -->
 <!-- así no es necesario acceder al sistema con abroot ni reiniciar -->
 
+<!-- Nueva forma -->
+The `~/.local/share` path exists, but the "icons" folder might not exists depending if you previously installed some program that created this folder automatically or not.
+
+So, we need to check if the "icons" folder exists:
+- If this folder does not exist and we copy the cursor theme folder to `~/.local/share/icons` the "icons" folder will be created during the process, but it will contain the content of the cursor theme folder and not the folder itself. This would not work because we need a folder with the name of the cursor theme, "Bibata-Modern-Ice" in this case.
+
+So, let's first create the "icons" folder:
+- If this folder already exists, the following execution will show you this error `mkdir: cannot create directory ‘/home/[your-user-name]/.local/share/icons’: File exists
+`, so don't worry about this, we have what we wanted.
 ```bash
-cp -r ./Bibata-Modern-Ice /tmp
+mkdir ~/.local/share/icons
 ```
 
-then
+Now, make sure you downloaded the cursor theme that we mentioned previously (if not, this is the [direct link](https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.3/Bibata-Modern-Ice.tar.gz) to download it) and extract it, so you have now a "Bibata-Modern-Ice" folder and it contains:
+- "cursor.theme" (file)
+- "cursors" (folder)
+- "index.theme" (file)
+
+With your terminal, go to the path where you have the cursor theme folder and execute the copy command:
 
 ```bash
-sudo abroot shell
+cp -r ./Bibata-Modern-Ice ~/.local/share/icons
 ```
 
-This will request your password.
-
-(leer documentación para saber exactamente lo que hace el comando )
-This will be shown, it's just a warning because you are going to access ... and you will gain write permission on the System files. It can be done, but it isn't recommended.
-
-```bash
-===============================================================================
-PLEASE READ CAREFULLY BEFORE PROCEEDING
-===============================================================================
-Changes made in the shell will be applied to the future root on next boot on
-successful.
-Running a command in a transactional shell is meant to be used by advanced users
-for maintenance purposes.
-
-If you ended up here trying to install an application, consider using
-Flatpak/Appimage or Apx (apx install package) instead.
-
-Read more about ABRoot at [https://documentation.vanillaos.org/docs/ABRoot/].
-
-Are you sure you want to proceed? [y/N]:
-```
-
-Just press the `Y` key to proceed.
-
-Copy and paste the cursor theme folder from `tmp` to `/usr/share/icons`
-
-```bash
-cp -r /tmp/Bibata-Modern-Ice/ /usr/share/icons
-```
-
-And 
-```bash
-exit
-```
-
-Wait until the "bring back read only" process has finished and you will need to restart the System in order to apply these changes.
 
 Now you need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
-Install gnome-tweaks in order to select the cursor theme:
 
-This must be installed from nix repository. If you use this app from a different repository, you won't have the same result or it won't work.
+This must be installed from nix repository.
+- If you use this app from a different repository, you won't have the same result or it won't work.
 
-We could install this app using home-manager, but let's use this command to make it more simple:
+We could install this app using home-manager, but let's use `apx` to make it more simple:
 
 Funciona
 ```bash
@@ -266,13 +250,14 @@ apx install --nix gnome.gnome-tweaks
 <!-- TODO -->
 Once we have installed "gnome-tweaks" app, we can proceed...
 
-Open "gnome-teaks" and change the cursor theme in the "Appearance" menu.
+Open "gnome-teaks" and change the cursor theme in the "Appearance" menu...
 
 <!-- TODO: comprobar esto -->
 Parece que las aplicaciones del contenedor apt aplican el tema de cursores de la misma forma que las aplicaciones de Nix, es decir, parece que comparten la configuración de Nix.
 
-<!-- TODO: Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
+<!-- Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
 
+<!-- TODO: leer y ver si se puede actualizar o quitar -->
 (specific to Vanilla OS)
 If you have some Vanilla OS containers running (arch, fedora, ...) maybe this configuration will not work if you have some apps already installed or you install some apps in the future on these containers.
 
