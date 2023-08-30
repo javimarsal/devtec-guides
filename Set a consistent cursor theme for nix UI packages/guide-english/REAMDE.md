@@ -128,38 +128,10 @@ After opening the `home.nix` file with nano editor, we can see that its content 
 
 The last piece of code contains the line `[CONTENT HERE]...`, this is where we must add the following configuration and it can be placed at the end of the file, but inside the braces (`{ }`):
 
-```bash
-home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-};
-
-home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
-```
-
 Siguiendo este [enlace](https://nixos.wiki/wiki/Cursor_Themes) (prefireblemente y más fácil):
+
 ```bash
-home.pointerCursor =
-    let
-      getFrom = url: hash: name: {
-          gtk.enable = true;
-          x11.enable = true;
-          name = name;
-          size = 48;
-          package =
-            pkgs.runCommand "moveUp" {} ''
-              mkdir -p $out/share/icons
-              ln -s ${pkgs.fetchzip {
-                url = url;
-                hash = hash;
-              }} $out/share/icons/${name}
-          '';
-        };
-    in
-      getFrom
-        "https://github.com/GNOME/adwaita-icon-theme/archive/refs/tags/43.tar.gz"
-        "sha256-N6GPlRqEmgoxW2hRnvUyXMkqaXaNZRNluBd7U0AUGRU="
-        "Adwaita";
+home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
 ```
 
 Cursor (en la sección de "tags" y seleccionando la versión de gnome que tiene el SO): https://github.com/GNOME/adwaita-icon-theme/releases/tag/43
@@ -183,6 +155,11 @@ home-manager switch
 
 HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita, ya que es el cursor que viene de base.
 
+Taking into account:
+- If you had an application running and you don't see any change, try closing and opening it again.
+- If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice so far!
+- Some Nix apps will use the System cursor theme, so that's fine if you want it like that.
+
 ## Take into account
 
 (This part of the guide is optional, but maybe you would like to know what it's about if this situation happens to you in the future)
@@ -197,11 +174,6 @@ So now, let's see an example where we are going to set the "Bibata Modern Ice" c
 ### Setting "Bibata Modern Ice" cursor theme for Nix apps
 
 ```bash
-home.pointerCursor = {
-    name = "Bibata-Modern-Ice";
-    package = pkgs.bibata-cursors;
-};
-
 home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
 ```
 
@@ -214,8 +186,6 @@ And build and activate configuration:
 ```bash
 home-manager switch
 ```
-
-If you had a Nix app opened during this process, maybe you won't see any change. So you have to close the Nix app and open it again to see that the configuration has been applied.
 
 ### Setting "Bibata Modern Ice" cursor theme for the System
 
@@ -297,6 +267,9 @@ apx install --nix gnome.gnome-tweaks
 Once we have installed "gnome-tweaks" app, we can proceed...
 
 Open "gnome-teaks" and change the cursor theme in the "Appearance" menu.
+
+<!-- TODO: comprobar esto -->
+Parece que las aplicaciones del contenedor apt aplican el tema de cursores de la misma forma que las aplicaciones de Nix, es decir, parece que comparten la configuración de Nix.
 
 <!-- TODO: Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
 
