@@ -73,6 +73,7 @@ export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/
 nix-shell '<home-manager>' -A install
 ```
 
+<!-- TODO: Buscar el error, para explicarlo bien -->
 Don't worry about some red text, this is just some warnings of Nix (due to `optionsDocBook is deprecated since 23.11 and will be removed in 24.05`).
 
 <!-- TODO: no poner lo que sale en la terminal (resultado), sino explicarlo -->
@@ -112,6 +113,8 @@ That means that the `EDITOR`` variable must be recognize in order to execute tha
 ```bash
 EDITOR=nano home-manager edit
 ```
+
+(You can take a look to this [guide](https://linuxhandbook.com/export-command/) later in order to understand how to define environment variables)
 
 After opening the `home.nix` file with nano editor, we can see that its content is similar to this:
 
