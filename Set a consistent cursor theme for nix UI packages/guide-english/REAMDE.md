@@ -22,31 +22,15 @@ The most part of the configuration is done using the terminal, specifically "Con
 
 ## Initializing Nix (specific to Vanilla OS)
 
-The first step is to initialize Nix. If you haven't do it before, 
+The first step is to initialize Nix. If you haven't do it before, execute this command:
 
 ```bash
 apx init --nix
 ```
-Te pedirá tu contraseña.
 
-This will show this dialog before running the installation. Just press the `Y` key (yes option).
+This will request your password, and after that a message will appear letting you know that a `.nix` folder will be created in your home directory. Just press the `Y` key (yes option) to process with the installation.
 
-```bash
-This will create a '.nix' folder in your home directory and set up some SystemD units to mount that folder at /nix before running the installation. Confirm 'y' to continue. [y/N]:
-```
-
-When the installation has finished, it is necessary to reboot. Maybe the system will require your password in order to proceed.
-
-(NO INCLUIR)
-```
-Installation finished!  To ensure that the necessary environment
-variables are set, either log in again, or type
-
-  . /home/[your-user-name]/.nix-profile/etc/profile.d/nix.sh
-
-in your shell.
- SUCCESS  Installation complete. Reboot to start using nix.
-```
+When the installation has finished, it is necessary to reboot in order to apply all changes in the future partition (a Vanilla OS feature).
 
 <br />
 
