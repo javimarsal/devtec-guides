@@ -3,7 +3,8 @@
 (leer esta guía en Español 🇪🇸)
 
 Table of contents:
-- Why this guide? (TODO)
+1. Why this guide? (TODO)
+1. 
 
 Some aspects to know before reading or following this guide:
 - All these steps has been tested in an "out of the box" Vanilla OS installation.
@@ -35,12 +36,14 @@ When the installation has finished, it is necessary to reboot in order to apply 
 <br />
 
 ## Installing Home Manager
-This project (Home Manager) provides a basic system for managing a user environment using the Nix package manager together with the Nix libraries found in Nixpkgs. It allows declarative configuration of user specific (non global) packages and dotfiles.
+**Home Manager** allows you to manage your user environment like installing packages or setting some configuration, and then you can reproduce that to another machine. This is so useful, so we are using this tool for our cursor configuration.
 
-Realizado en VanillaOS, similar en otros entornos que utilizan Nix.
+If you just finished initializing Nix, let's continue (if not, go to [last section](#initializing-nix-specific-to-vanilla-os) before following this step).
+
+
 
 Lo primero de todo, instalar home-manager: https://julianhofer.eu/blog/01-silverblue-nix/#home-manager
-- obtenido de: https://discord.com/channels/1023243680829681704/1097468317477912646/1097786733485101088
+
 
 ```bash
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
@@ -279,8 +282,16 @@ Para solucionar esto, debemos instalar los cursores de forma convencional, es de
 
 Si te gustó esta guía no dudes en dejar un comentario. También me gustaría saber si has tenido alguna dificultad, no entiendes algo o no te funciona. Así podré salvarle para mejorar esta guía 😉
 
+## Acknowledgments
+Some parts of this guide wouldn't be possible without the help of the [Vanilla OS Discord Community](https://discord.gg/vanilla-os-1023243680829681704), so I would like to thank:
+- Feng Lengshun for making me discover Home Manager.
+- "Monster" for letting me know how to initialize Nix in Vanilla OS.
+- "Monster" and Pulkit Krishna for showing me how to add a cursor theme in Vanilla OS.
+
 ## References
 
-La parte de Troubleshooting: https://nixos.wiki/wiki/Sway
+[1] La parte de Troubleshooting: https://nixos.wiki/wiki/Sway
 
-https://nixos.wiki/wiki/Cursor_Themes
+[2] Home Manager project repo: https://github.com/nix-community/home-manager
+
+[3] https://nixos.wiki/wiki/Cursor_Themes
