@@ -38,12 +38,9 @@ When the installation has finished, it is necessary to reboot in order to apply 
 ## Installing Home Manager
 **Home Manager** allows you to manage your user environment like installing packages or setting some configuration, and then you can reproduce that to another machine. This is so useful, so we are using this tool for our cursor configuration.
 
-If you just finished initializing Nix, let's continue (if not, go to [last section](#initializing-nix-specific-to-vanilla-os) before following this step).
+If you just finished initializing Nix, let's continue (if not, go to the [last section](#initializing-nix-specific-to-vanilla-os) before following this step).
 
-
-
-Lo primero de todo, instalar home-manager: https://julianhofer.eu/blog/01-silverblue-nix/#home-manager
-
+Now, let's continue with the Home Manager installation [[1]](#references).
 
 ```bash
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
@@ -51,11 +48,6 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 
 ```bash
 nix-channel --update
-```
-
-<!-- Si es necesario para encontrar los paquetes necesarios de Nix?? Buscar -->
-```bash
-export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 ```
 
 ```bash
@@ -98,6 +90,11 @@ Please set the $EDITOR environment variable
 ```
 
 That means that the `EDITOR`` variable must be recognize in order to execute that command. As this environment variable is not set on Vanilla OS by default, a quick solution would be to execute the command after setting the variable temporarily:
+
+o primero esto, así nos durá en toda la sesión de la terminal, y después solo `home-manager edit`.
+```bash
+export EDITOR=nano
+```
 
 ```bash
 EDITOR=nano home-manager edit
@@ -233,11 +230,15 @@ apx install --nix gnome.gnome-tweaks
 - We use `--nix` flag to specify the nix package manager.
 - To know the correct name for the package "gnome-tweaks" we can search for it [here](https://search.nixos.org/packages?channel=23.05&show=gnome.gnome-tweaks&from=0&size=50&sort=relevance&type=packages&query=gnome-tweaks).
 
+After installing gnome-tweaks, the application menu shortcut will not appear until we reboot. If you don't want to reboot right now, you can execute `gnome-tweaks` command in your terminal to open the app.
+
 
 <!-- TODO -->
 Once we have installed "gnome-tweaks" app, we can proceed...
 
 Open "gnome-teaks" and change the cursor theme in the "Appearance" menu...
+
+After that, move the cursor to the desktop or to the top bar menu to see that the cursor appearance changes.
 
 <!-- TODO: comprobar esto -->
 Parece que las aplicaciones del contenedor apt aplican el tema de cursores de la misma forma que las aplicaciones de Nix, es decir, parece que comparten la configuración de Nix.
@@ -290,8 +291,6 @@ Some parts of this guide wouldn't be possible without the help of the [Vanilla O
 
 ## References
 
-[1] La parte de Troubleshooting: https://nixos.wiki/wiki/Sway
+[1] Home Manager project repo: https://github.com/nix-community/home-manager
 
-[2] Home Manager project repo: https://github.com/nix-community/home-manager
-
-[3] https://nixos.wiki/wiki/Cursor_Themes
+[2] https://nixos.wiki/wiki/Cursor_Themes
