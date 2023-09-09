@@ -63,42 +63,35 @@ Don't worry about some red text, this is just some warnings of Nix (due to `opti
 <!-- TODO: no poner lo que sale en la terminal (resultado), sino explicarlo -->
 After installing Home Manager, we can use this tool to set the cursor theme for Nix apps. In the next section we will use the `home-manager edit` command to achieve that.
 
-
-
-the `/home/[your-user-name]/.config/home-manager/home.nix` file  be edit to configure Home Manager. It can be done using your favourite editor or just use nano.
-
-```bash
-nano /home/[your-user-name]/.config/home-manager/home.nix
-```
-
 <br />
 
 ## Setting cursor theme for Nix apps
 
-So now, let's set the configuration to show the same cursor theme as the system on (Adwaita by default) for Nix UI applications.
+Before following this section make sure you have [initialized Nix](#initializing-nix-specific-to-vanilla-os) and [installed Home Manager](#installing-home-manager). So now, let's set the configuration to show the same cursor theme as the system one (Adwaita by default) for Nix UI applications.
 
-As seen before, we need to edit this file:
+To make some configuration, we need to edit the file:
 - `/home/[your-user-name]/.config/home-manager/home.nix`
 
-It can be edited using the nano editor, but by installing Home Manager this command is now available: `home-manager edit`
+It can be edited by using your favourite editor, but after installing Home Manager the `home-manager edit` command is now available for us, so let's use it to edit that file.
 
-If you try that, maybe a similar error to this will be shown:
+If you execute the command directly, maybe a similar error will be shown:
 ```bash
 Please set the $EDITOR environment variable
 ```
 
-That means that the `EDITOR`` variable must be recognize in order to execute that command. As this environment variable is not set on Vanilla OS by default, a quick solution would be to execute the command after setting the variable temporarily:
-
-o primero esto, así nos durá en toda la sesión de la terminal, y después solo `home-manager edit`.
+That means that the `EDITOR` variable must be recognize in order to execute that command. As this environment variable is not set on Vanilla OS by default, a quick solution would be to execute the command after setting the variable temporarily. The `export` command will create this variable for the terminal sesion only (if you close the terminal, you will have to execute this command again). So, in this case, we will be using the "nano" editor:
 ```bash
 export EDITOR=nano
 ```
 
+And now enter into the configuration:
 ```bash
-EDITOR=nano home-manager edit
+home-manager edit
 ```
 
-(You can take a look to this [guide](https://linuxhandbook.com/export-command/) later in order to understand how to define environment variables)
+(In order to understand how to define environment variables, you can take a look to this [guide](https://linuxhandbook.com/export-command/) later)
+
+<!-- por aquí -->
 
 After opening the `home.nix` file with nano editor, we can see that its content is similar to this:
 
