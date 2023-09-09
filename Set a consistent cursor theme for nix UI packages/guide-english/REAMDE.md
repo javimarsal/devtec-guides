@@ -15,10 +15,11 @@ Some aspects to know before reading or following this guide:
     - I think it is necessary to know, maybe you have learnt this right now!
 
 The most part of the configuration is done using the terminal, specifically "Console" (the terminal emulator from GNOME), this is completly valid and the default one on Vanilla OS. So, keep your terminal opened and let's start with this guide!
+- If you already have initialized Nix and installed Home Manager, you can start following this guide from the ["Setting cursor theme for Nix apps"](#setting-cursor-theme-for-nix-apps) section.
 
 <br />
 
-<!-- TODO -->
+<!-- TODO: complete this section -->
 ## Why this guide?
 
 ## Initializing Nix (specific to Vanilla OS)
@@ -36,44 +37,41 @@ When the installation has finished, it is necessary to reboot in order to apply 
 <br />
 
 ## Installing Home Manager
-**Home Manager** allows you to manage your user environment like installing packages or setting some configuration, and then you can reproduce that to another machine. This is so useful, so we are using this tool for our cursor configuration.
+**Home Manager** [[1]](#references) allows you to manage your user environment like installing packages or setting some configuration for Nix. This is so useful, so we are using this tool for our cursor configuration.
 
 If you just finished initializing Nix, let's continue (if not, go to the [last section](#initializing-nix-specific-to-vanilla-os) before following this step).
 
-Now, let's continue with the Home Manager installation [[1]](#references).
+Now, let's continue with the Home Manager installation [[2]](#references).
 
+The first step is to add the `home-manager` channel:
 ```bash
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 ```
 
+Then we update and download the latest version for the channels, including the `home-manager` channel that we have just added:
 ```bash
 nix-channel --update
 ```
 
+After that, we can install `home-manager`:
 ```bash
 nix-shell '<home-manager>' -A install
 ```
 
-<!-- TODO: Buscar el error, para explicarlo bien -->
-Don't worry about some red text, this is just some warnings of Nix (due to `optionsDocBook is deprecated since 23.11 and will be removed in 24.05`).
+Don't worry about some red text, this is just some warnings of Nix (due to `optionsDocBook is deprecated since 23.11 and will be removed in 24.05`) and it is a bug that will be fixed in a future version [[3]](#references).
 
 <!-- TODO: no poner lo que sale en la terminal (resultado), sino explicarlo -->
-After installing Home Manager, this is shown in shell:
+After installing Home Manager, we can use this tool to set the cursor theme for Nix apps. In the next section we will use the `home-manager edit` command to achieve that.
 
-```bash
-All done! The home-manager tool should now be installed and you can edit
 
-    /home/[your-user-name]/.config/home-manager/home.nix
 
-to configure Home Manager. Run 'man home-configuration.nix' to
-see all available options.
-```
-
-This means that the `/home/[your-user-name]/.config/home-manager/home.nix` file must be edit to configure Home Manager. It can be done using your favourite editor or just use nano.
+the `/home/[your-user-name]/.config/home-manager/home.nix` file  be edit to configure Home Manager. It can be done using your favourite editor or just use nano.
 
 ```bash
 nano /home/[your-user-name]/.config/home-manager/home.nix
 ```
+
+<br />
 
 ## Setting cursor theme for Nix apps
 
@@ -293,4 +291,8 @@ Some parts of this guide wouldn't be possible without the help of the [Vanilla O
 
 [1] Home Manager project repo: https://github.com/nix-community/home-manager
 
-[2] https://nixos.wiki/wiki/Cursor_Themes
+[2] Home Manager installation guide from Julian Hofer: https://julianhofer.eu/blog/01-silverblue-nix/#home-manager
+
+[3] `optionsDocBook` warning message bug issue: https://github.com/nix-community/home-manager/issues/4273
+
+[4] Configuration needed for setting a cursor theme using Home Manager: https://nixos.wiki/wiki/Cursor_Themes
