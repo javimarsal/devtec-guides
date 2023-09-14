@@ -89,13 +89,11 @@ And now enter into the configuration:
 home-manager edit
 ```
 
-(In order to understand how to define environment variables, you can take a look to this [guide](https://linuxhandbook.com/export-command/) later)
+(In order to understand how to define environment variables, you can take a look at this [guide](https://linuxhandbook.com/export-command/) later).
 
-<!-- por aquí -->
+After opening the `home.nix` file, we can see that its content is similar to this:
 
-After opening the `home.nix` file with nano editor, we can see that its content is similar to this:
-
-```
+```nix
 { config, pkgs, ... }:
 
 {
@@ -103,20 +101,26 @@ After opening the `home.nix` file with nano editor, we can see that its content 
 }
 ```
 
-The last piece of code contains the line `[CONTENT HERE]...`, this is where we must add the following configuration and it can be placed at the end of the file, but inside the braces (`{ }`):
+The last piece of code contains the line `[CONTENT HERE]...`, this is just to show you where to add the cursor theme configuration. There may be some different content already, so we must respect it.
 
-Siguiendo este [enlace](https://nixos.wiki/wiki/Cursor_Themes) (prefireblemente y más fácil):
+So, following this guide [[4]](#references) from [NixOS Wiki](https://nixos.wiki/wiki/Main_Page), we need to add the following line in order apply the "Adwaita" cursor theme for Nix apps that work with an UI:
 
 ```bash
 home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
 ```
 
-<!-- esto ya no es necesario -->
-Cursor (en la sección de "tags" y seleccionando la versión de gnome que tiene el SO): https://github.com/GNOME/adwaita-icon-theme/releases/tag/43
-<!--  -->
+After researching for a while, I noticed that this is the configuration that fits the best on Vanilla OS. - You could try a different configuration and use cursor theme URL instead (that will work), but it may add some cursor theme conflicts with Vanilla OS apps inside containers. If you don't use containers right now, this will help you if you try them in the future.
+
+
+Now, a brief explanation about this configuration [[5]](#references). We can identify two parts:
+- Before equals `=` symbol: this is the option that corresponds to the path containing the cursor theme.
+- After equals `=` symbol: this is the path where the first option points to. We need two things to form this path:
+    - The package name: this is the actual cursor theme and it will be downloaded from the Nix package collection (pkgs). So, in this case, the package name for the "Adwaita" cursor theme is `gnome.adwaita-icon-theme`. You can look for another cursor themes [here](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=gnome.adwaita-icon-theme).
+    - The cursor theme name: in this is case, the name is "Adwaita". You can [download](https://github.com/GNOME/adwaita-icon-theme/releases/tag/43) the cursor theme to check which is the name.
+
+<!-- por aquí -->
 
 <!-- TODO: cambiar, ajustarlo a lo actual -->
-Now, a breaf explanation:
 - The first part corresponds to `home.pointerCursor` and it contains:
     - `name`, it is the name of the cursor theme.
     - `package`, it is the name of the package that contains the cursor theme. So if the package is not installed, Home Manager will it install it for us.
@@ -289,3 +293,5 @@ Some parts of this guide wouldn't be possible without the help of the [Vanilla O
 [3] `optionsDocBook` warning message bug issue: https://github.com/nix-community/home-manager/issues/4273
 
 [4] Configuration needed for setting a cursor theme using Home Manager: https://nixos.wiki/wiki/Cursor_Themes
+
+[5] `home.file.".icons/default".source` meaning: https://mipmip.github.io/home-manager-option-search/?query=home.file.%3Cname%3E.source
