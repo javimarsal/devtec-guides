@@ -130,24 +130,18 @@ Then build and activate the configuration:
 home-manager switch
 ```
 
-HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita, ya que es el cursor que viene de base.
-
 Taking into account:
 - If you had a Nix application running and you don't see any change, try dragging the app window, or close and open it again.
 - If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice!
 
-## Take into account
+## Setting a different theme for the whole system
 
-(This part of the guide is optional, but maybe you would like to know what it's about if this situation happens to you in the future)
+At this point, you have set the same cursor theme for Nix apps and the system if "Adwaita" was your default cursor theme, and this may be enough for you.
 
-At this point, we have set the "Adwaita" cursor theme for Nix apps that use UI as audacity, discord, vscode, ... and everything looks good. We have achive the objective to have the same cursor theme in all our System.
-
-But this is working because the cursor theme we have set to Nix apps was exactly the same as the system default one (Adwaita). So we have to take into account the following:
-- If we prefer another cursor theme (different to the System's default) it will be necessary to change the cursor theme for both parts, Nix apps (done previously) and the System itself.
-
-So now, let's see an example where we are going to set the "Bibata Modern Ice" cursor theme across all the System.
+In the following sections I will show you how to set a different cursor theme (Bibata Modern Ice) for Nix apps and the system. So, if you keep reading you will learn how to configure both parts.
 
 ### Setting "Bibata Modern Ice" cursor theme for Nix apps
+<!-- por aquí -->
 
 ```bash
 home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
@@ -163,15 +157,15 @@ And build and activate configuration:
 home-manager switch
 ```
 
-### Setting "Bibata Modern Ice" cursor theme for the System
+### Setting "Bibata Modern Ice" cursor theme for the system
 
 You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) cursor theme from [gnome-look.org](https://www.gnome-look.org). Just go to the "Files" section and download the "Bibata-Modern-Ice.tar.gz" file.
 
 <!-- TODO -->
 #### (specific to Vanilla OS)
-In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because System files are read only. We could achive that by using the `abroot` command from Vanilla OS, but we would be not following their devs recommendation: "use only abroot if you are an advanced user and if what you want to do can't be done in a different way".
+In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because system files are read only. We could achive that by using the `abroot` command from Vanilla OS, but we would be not following their devs recommendation: "use only abroot if you are an advanced user and if what you want to do can't be done in a different way".
 
-So yeah, we can do it in a different way without writing in the System files. Instead of copying the cursor theme to that path, we will copy it to `~/.local/share/icons`.
+So yeah, we can do it in a different way without writing in the system files. Instead of copying the cursor theme to that path, we will copy it to `~/.local/share/icons`.
 
 <!-- TODO cambiar a '~/.local/share/icons' -->
 <!-- crear directorio -->
