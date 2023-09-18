@@ -109,29 +109,23 @@ So, following this guide [[4]](#references) from [NixOS Wiki](https://nixos.wiki
 home.file.".icons/default".source = "${pkgs.gnome.adwaita-icon-theme}/share/icons/Adwaita";
 ```
 
-After researching for a while, I noticed that this is the configuration that fits the best on Vanilla OS. - You could try a different configuration and use cursor theme URL instead (that will work), but it may add some cursor theme conflicts with Vanilla OS apps inside containers. If you don't use containers right now, this will help you if you try them in the future.
+Now, save and exit the file. If you're using nano, then press `Ctrl` + `O` and `enter` to save the file, and `Ctrl` + `X` to exit the file.
 
+After researching for a while, I noticed that this is the configuration that fits the best on Vanilla OS.
+- You could apply a different configuration and use a cursor theme URL instead (that will work), but it may add some cursor theme conflicts while using Vanilla OS apps inside containers. So, this will help you if you are using containers right now or in the future.
 
 Now, a brief explanation about this configuration [[5]](#references). We can identify two parts:
 - Before equals `=` symbol: this is the option that corresponds to the path containing the cursor theme.
 - After equals `=` symbol: this is the path where the first option points to. We need two things to form this path:
     - The package name: this is the actual cursor theme and it will be downloaded from the Nix package collection (pkgs). So, in this case, the package name for the "Adwaita" cursor theme is `gnome.adwaita-icon-theme`. You can look for another cursor themes [here](https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=gnome.adwaita-icon-theme).
-    - The cursor theme name: in this is case, the name is "Adwaita". You can [download](https://github.com/GNOME/adwaita-icon-theme/releases/tag/43) the cursor theme to check which is the name.
+    - The cursor theme name: in this case, the name is "Adwaita". You can [download](https://github.com/GNOME/adwaita-icon-theme/releases/tag/43) the cursor theme to check that name (just extract the file and look for the name of the folder containing the "cursors" subfolder, it should be "Adwaita").
 
-<!-- por aquí -->
-
-<!-- TODO: cambiar, ajustarlo a lo actual -->
-- The first part corresponds to `home.pointerCursor` and it contains:
-    - `name`, it is the name of the cursor theme.
-    - `package`, it is the name of the package that contains the cursor theme. So if the package is not installed, Home Manager will it install it for us.
-- The second part beginning with `home.file` indicates the path of the cursor theme that we want to set.
-
-Now press `Ctrl` + `O` and `enter` to save the file, and then `Ctrl` + `X` to exit the file. To finish, downloads  the  Nix expressions of all subscribed channels (it might no be necessary because we did it previously):
+To finish, execute the following command to download the Nix expressions of all subscribed channels (it might no be necessary because we did it [previously](#installing-home-manager)):
 ```bash
 nix-channel --update
 ```
 
-And build and activate configuration:
+Then build and activate the configuration:
 ```bash
 home-manager switch
 ```
@@ -139,9 +133,8 @@ home-manager switch
 HASTA AQUÍ FUNCIONA, y es lo básico y necesario para tener el tema de Adwaita, ya que es el cursor que viene de base.
 
 Taking into account:
-- If you had an application running and you don't see any change, try closing and opening it again.
-- If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice so far!
-- Some Nix apps will use the System cursor theme, so that's fine if you want it like that.
+- If you had a Nix application running and you don't see any change, try dragging the app window, or close and open it again.
+- If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice!
 
 ## Take into account
 
