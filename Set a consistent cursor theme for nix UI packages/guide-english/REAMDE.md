@@ -166,47 +166,33 @@ And finally, build and activate the configuration:
 home-manager switch
 ```
 
-### Setting "Bibata Modern Ice" cursor theme for the system
+### Setting "Bibata Modern Ice" cursor theme for the system (specific to Vanilla OS)
 
-You can look for the [Bibata Modern Ice](https://www.gnome-look.org/p/1197198) cursor theme from [gnome-look.org](https://www.gnome-look.org). Just go to the "Files" section and download the "Bibata-Modern-Ice.tar.gz" file.
+This section is focused on Vanilla OS, that means that we will keep the "read-only" way for system files, so the changes will be applied on the home directory. If you use a different Linux OS:
+- The cursor theme should be paste into `/usr/share/icons`.
+- The GNOME Tweaks app should be installed using your OS package manager.
 
-<!-- TODO -->
-#### (specific to Vanilla OS)
-In other Linux distros you will only have to copy and paste the cursor theme folder to `/usr/share/icons`, but Vanilla OS does not permit to copy the folder to that directory because system files are read only. We could achive that by using the `abroot` command from Vanilla OS, but we would be not following their devs recommendation: "use only abroot if you are an advanced user and if what you want to do can't be done in a different way".
+The first thing to do is downloading the [Bibata Modern Ice](https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.3/Bibata-Modern-Ice.tar.gz) (you can also look for it at "gnome-look.org").
 
-So yeah, we can do it in a different way without writing in the system files. Instead of copying the cursor theme to that path, we will copy it to `~/.local/share/icons`.
+Go to the folder where you have downloaded the file and extract it. Check you have one "Bibata-Modern-Ice" folder and it contains the "cursors" folder in addition to other files.
 
-<!-- TODO cambiar a '~/.local/share/icons' -->
-<!-- crear directorio -->
-<!-- copiar carpeta del tema de iconos -->
-<!-- así no es necesario acceder al sistema con abroot ni reiniciar -->
-
-<!-- Nueva forma -->
-The `~/.local/share` path exists, but the "icons" folder might not exists depending if you previously installed some program that created this folder automatically or not.
-
-So, we need to check if the "icons" folder exists:
-- If this folder does not exist and we copy the cursor theme folder to `~/.local/share/icons` the "icons" folder will be created during the process, but it will contain the content of the cursor theme folder and not the folder itself. This would not work because we need a folder with the name of the cursor theme, "Bibata-Modern-Ice" in this case.
+The next step is to copy and paste the "Bibata-Modern-Ice" folder to `~/.local/share/icons`, but first let's make sure that `icons` folder exists:
+- If this folder does not exist and we paste the cursor theme folder there, the `icons` folder will be created during the process, but it will contain the cursor theme folder content and not the folder itself. This would not work because we need a folder with the name of the cursor theme, "Bibata-Modern-Ice" in this case.
 
 So, let's first create the "icons" folder:
-- If this folder already exists, the following execution will show you this error `mkdir: cannot create directory ‘/home/[your-user-name]/.local/share/icons’: File exists
-`, so don't worry about this, we have what we wanted.
+- If this folder already exists, the following execution will show you this error `mkdir: cannot create directory ‘/home/[your-user-name]/.local/share/icons’: File exists`, so don't worry about this, we have what we wanted.
 ```bash
 mkdir ~/.local/share/icons
 ```
 
-Now, make sure you downloaded the cursor theme that we mentioned previously (if not, this is the [direct link](https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.3/Bibata-Modern-Ice.tar.gz) to download it) and extract it, so you have now a "Bibata-Modern-Ice" folder and it contains:
-- "cursor.theme" (file)
-- "cursors" (folder)
-- "index.theme" (file)
-
-With your terminal, go to the path where you have the cursor theme folder and execute the copy command:
+Now, with your terminal, go to the path where you have the cursor theme folder and execute the copy command (or open that folder, then mouse left click and select "Open in Console"):
 
 ```bash
 cp -r ./Bibata-Modern-Ice ~/.local/share/icons
 ```
 
-
-Now you need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
+<!-- por aquí -->
+After that, need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
 
 This must be installed from nix repository.
 - If you use this app from a different repository, you won't have the same result or it won't work.
@@ -229,7 +215,7 @@ Once we have installed "gnome-tweaks" app, we can proceed...
 
 Open "gnome-teaks" and change the cursor theme in the "Appearance" menu...
 
-After that, move the cursor to the desktop or to the top bar menu to see that the cursor appearance changes.
+After that, 
 
 <!-- TODO: comprobar esto -->
 Parece que las aplicaciones del contenedor apt aplican el tema de cursores de la misma forma que las aplicaciones de Nix, es decir, parece que comparten la configuración de Nix.
