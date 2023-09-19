@@ -141,18 +141,27 @@ At this point, you have set the same cursor theme for Nix apps and the system if
 In the following sections I will show you how to set a different cursor theme (Bibata Modern Ice) for Nix apps and the system. So, if you keep reading you will learn how to configure both parts.
 
 ### Setting "Bibata Modern Ice" cursor theme for Nix apps
-<!-- por aquí -->
 
+If you closed your terminal after completing the previous sections, you will have to export the `EDITOR` variable as [we did before](#setting-cursor-theme-for-nix-apps).
+
+The configuration remains the same for Nix apps, so only change the related "Adwaita" parts by the "Bibata" ones.
+
+First, we open the Home Manager configuration:
+```bash
+home-manager edit
+```
+
+And then, change the "Adwaita" configuration by the "Bibata Modern Ice" cursor theme from the ["bibata-cursors" package](https://search.nixos.org/packages?channel=23.05&show=bibata-cursors&from=0&size=50&sort=relevance&type=packages&query=bibata):
 ```bash
 home.file.".icons/default".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
 ```
 
-y luego
+Update Nix expressions of channels:
 ```bash
 nix-channel --update
 ```
 
-And build and activate configuration:
+And finally, build and activate the configuration:
 ```bash
 home-manager switch
 ```
