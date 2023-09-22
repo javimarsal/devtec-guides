@@ -136,7 +136,7 @@ Taking into account:
 
 <br />
 
-## Setting a different theme for the whole system
+## Setting a different theme for Nix and system
 
 At this point, you have set the same cursor theme for Nix apps and the system if "Adwaita" was your default cursor theme, and this may be enough for you.
 
