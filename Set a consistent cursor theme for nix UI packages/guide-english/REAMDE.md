@@ -241,6 +241,8 @@ Some parts of this guide wouldn't be possible without the help of the [Vanilla O
 
 ## References
 
+Here, you can find direct links to all the external information I have checked to complete this guide.
+
 [1] Home Manager project repo: https://github.com/nix-community/home-manager
 
 [2] Home Manager installation guide from Julian Hofer: https://julianhofer.eu/blog/01-silverblue-nix/#home-manager
