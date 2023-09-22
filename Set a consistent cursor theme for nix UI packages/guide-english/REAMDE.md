@@ -134,6 +134,8 @@ Taking into account:
 - If you had a Nix application running and you don't see any change, try dragging the app window, or close and open it again.
 - If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice!
 
+<br />
+
 ## Setting a different theme for the whole system
 
 At this point, you have set the same cursor theme for Nix apps and the system if "Adwaita" was your default cursor theme, and this may be enough for you.
@@ -185,71 +187,38 @@ So, let's first create the "icons" folder:
 mkdir ~/.local/share/icons
 ```
 
-Now, with your terminal, go to the path where you have the cursor theme folder and execute the copy command (or open that folder, then mouse left click and select "Open in Console"):
+Now, with your terminal, go to the path where you have the cursor theme folder (or open that folder, then mouse left click and select "Open in Console") and execute this command:
 
 ```bash
 cp -r ./Bibata-Modern-Ice ~/.local/share/icons
 ```
 
 <!-- por aquí -->
-After that, need to have the "gnome-tweaks" app install. In Vanilla OS you can follow these steps.
+With that, the cursor theme has been added to the system, but we need to set it. In order to do that, we will use the "gnome-tweaks" app, but we have to install it first (if you didn't before). In Vanilla OS you can follow these steps.
 
-This must be installed from nix repository.
-- If you use this app from a different repository, you won't have the same result or it won't work.
+So, let's install "gnome-tweaks" from Nix repository.
+- If you install this app from a different repository (in Vanilla OS), you may not have the same result or it may not work.
+- We could install this app using Home Manager, but let's use `apx` to make it more simple.
 
-We could install this app using home-manager, but let's use `apx` to make it more simple:
-
-Funciona
+Execute this command to install the app.
 ```bash
 apx install --nix gnome.gnome-tweaks
 ```
 
-- We use `--nix` flag to specify the nix package manager.
-- To know the correct name for the package "gnome-tweaks" we can search for it [here](https://search.nixos.org/packages?channel=23.05&show=gnome.gnome-tweaks&from=0&size=50&sort=relevance&type=packages&query=gnome-tweaks).
+- We use `--nix` flag to specify the Nix package manager.
+- To know the correct name for the package "gnome-tweaks", you can check it on [here](https://search.nixos.org/packages?channel=23.05&show=gnome.gnome-tweaks&from=0&size=50&sort=relevance&type=packages&query=gnome-tweaks).
+- After installing gnome-tweaks, the application menu shortcut (called "Tweaks") will not appear until we reboot the system. If you don't want to reboot right now, you can execute `gnome-tweaks` command in your terminal to open the app.
 
-After installing gnome-tweaks, the application menu shortcut will not appear until we reboot. If you don't want to reboot right now, you can execute `gnome-tweaks` command in your terminal to open the app.
+Now, open gnome-tweaks and select the "Appearance" menu from the left menu (see image). From there, look for the "Cursor" option from the "Theme" section, then select the drop-down menu (it should contain "Adwaita *(default)*") and change it "Bibata Modern Ice".
 
+<!-- TODO: poner imagen de tweaks -->
 
-<!-- TODO -->
-Once we have installed "gnome-tweaks" app, we can proceed...
+There you go! 👏 you have just change the cursor theme for both parts, Nix and system apps.
 
-Open "gnome-teaks" and change the cursor theme in the "Appearance" menu...
-
-After that, 
-
-<!-- TODO: comprobar esto -->
-Parece que las aplicaciones del contenedor apt aplican el tema de cursores de la misma forma que las aplicaciones de Nix, es decir, parece que comparten la configuración de Nix.
-
-<!-- Volver a hacer la prueba porque no puedo descargar aplicaciones flatpak en la maquina virtual, y no aparece el cursor en aplicaciones en contenedores, como es el caso de gnome-tweaks -->
-
-<!-- TODO: leer y ver si se puede actualizar o quitar -->
-(specific to Vanilla OS)
-If you have some Vanilla OS containers running (arch, fedora, ...) maybe this configuration will not work if you have some apps already installed or you install some apps in the future on these containers.
-
-The solution I know is to reinitialize the containers in order to apply the cursor theme configuration.
-
-I don't if there's a better solution, but this is what I recommend to you.
-
-(Probar esto bien, mirar si al hacer esto, después cambiar cursor y ver si sigue funcionando)
-
-**Atención**: si funciona después de instalar nuevas aplicaciones y sin reinicializar los contenedores (ahora no funciona)
-- Probar si es cosa de los contenedores de Vanilla OS
-    - En contenedores apt: si la app es instalada después de cambiar el tema de cursores desde gnome-tweaks, la app tendrá ese tema. Una vez instalada, si cambiamos el tema (desde gnome-tweaks) no se aplican los cambios a no ser que reinstalemos la aplicación.
-    - En otros contenedores como aur o dnf: se aplica el tema de cursores de la configuración realizada para Nix.
-- Esto no es un problema de la configuración, tiene que ver más bien con los contenedores de Vanilla OS (pero se puede arreglar?)
-- Probar esto en una nueva imagen (VanillaOS-22-limpio 2)
-    - Instalar tema de cursores descargando el zip y aplicándolo desde gnome-tweaks.
-    - No configurar nada de nix.
-    - Mirar cómo se comporta con contenedores de apt y aur
-        - Aplicando el tema e instalar apps.
-        - Teniendo la app instalada y cambiar el tema.
-        - Hacer capturas y pasarlo por el discord de Vanilla.
-    - (No funciona)
-
+<br />
 
 <!-- TODO: To Change -->
-(Desactualizado, recuperar partes)
-## Atención
+## Conclusion
 
 Al realizar esta configuración, por ejemplo, en gnome utilizando la aplicación gnome-tweaks, aparecen el resto de cursores del tema bibata, es decir, se han instalado desde los paquetes de Nix utilizando home-manager, pero al seleccionarlos desde gnome-tweaks (si no es el indicado según la configuración realizada) no surtirá efecto.
 
@@ -260,11 +229,15 @@ Para solucionar esto, debemos instalar los cursores de forma convencional, es de
 
 Si te gustó esta guía no dudes en dejar un comentario. También me gustaría saber si has tenido alguna dificultad, no entiendes algo o no te funciona. Así podré salvarle para mejorar esta guía 😉
 
+<br />
+
 ## Acknowledgments
 Some parts of this guide wouldn't be possible without the help of the [Vanilla OS Discord Community](https://discord.gg/vanilla-os-1023243680829681704), so I would like to thank:
 - Feng Lengshun for making me discover Home Manager.
 - "Monster" for letting me know how to initialize Nix in Vanilla OS.
 - "Monster" and Pulkit Krishna for showing me how to add a cursor theme in Vanilla OS.
+
+<br />
 
 ## References
 
