@@ -3,8 +3,16 @@
 (leer esta guía en Español 🇪🇸)
 
 Table of contents:
-1. Why this guide? (TODO)
-1. 
+1. [Why this guide?](#why-this-guide)
+1. [Initializing Nix (specific to Vanilla OS)](#initializing-nix-specific-to-vanilla-os)
+1. [Installing Home Manager](#installing-home-manager)
+1. [Setting cursor theme for Nix apps](#setting-cursor-theme-for-nix-apps)
+1. [Setting a different theme for Nix and system](#setting-a-different-theme-for-nix-and-system)
+    1. [Setting "Bibata Modern Ice" cursor theme for Nix apps](#setting-bibata-modern-ice-cursor-theme-for-nix-apps)
+    1. [Setting "Bibata Modern Ice" cursor theme for the system (specific to Vanilla OS)](#setting-bibata-modern-ice-cursor-theme-for-the-system-specific-to-vanilla-os)
+1. [Conclusion](#conclusion)
+1. [Acknowledgments](#acknowledgments)
+1. [References](#references)
 
 Some aspects to know before reading or following this guide:
 - All these steps has been tested in an "out of the box" Vanilla OS installation.
@@ -15,12 +23,17 @@ Some aspects to know before reading or following this guide:
     - I think it is necessary to know, maybe you have learnt this right now!
 
 The most part of the configuration is done using the terminal, specifically "Console" (the terminal emulator from GNOME), this is completly valid and the default one on Vanilla OS. So, keep your terminal opened and let's start with this guide!
-- If you already have initialized Nix and installed Home Manager, you can start following this guide from the ["Setting cursor theme for Nix apps"](#setting-cursor-theme-for-nix-apps) section.
+- If you already had initialized Nix, you can start following this guide from the ["Installing Home Manager"](#installing-home-manager) section.
+- And if you also had installed Home Manager, you can jump into the ["Setting cursor theme for Nix apps"](#setting-cursor-theme-for-nix-apps) section directly.
+- If you didn't perform any of the previous, start reading this guide from the beginning.
 
 <br />
 
 <!-- TODO: complete this section -->
 ## Why this guide?
+
+Utilizar Nix, en ocasiones, es algo necesario en Vanilla OS si no quieres modificar el sistema ejecutando [abroot](https://documentation.vanillaos.org/docs/ABRoot/).
+
 
 ## Initializing Nix (specific to Vanilla OS)
 
@@ -37,6 +50,7 @@ When the installation has finished, it is necessary to reboot in order to apply 
 <br />
 
 ## Installing Home Manager
+
 **Home Manager** [[1]](#references) allows you to manage your user environment like installing packages or setting some configuration for Nix. This is so useful, so we are using this tool for our cursor configuration.
 
 If you just finished initializing Nix, let's continue (if not, go to the [last section](#initializing-nix-specific-to-vanilla-os) before following this step).
@@ -232,10 +246,11 @@ Si te gustó esta guía no dudes en dejar un comentario. También me gustaría s
 <br />
 
 ## Acknowledgments
+
 Some parts of this guide wouldn't be possible without the help of the [Vanilla OS Discord Community](https://discord.gg/vanilla-os-1023243680829681704), so I would like to thank:
 - Feng Lengshun for making me discover Home Manager.
 - "Monster" for letting me know how to initialize Nix in Vanilla OS.
-- "Monster" and Pulkit Krishna for showing me how to add a cursor theme in Vanilla OS.
+- "Monster" and Pulkit Krishna for showing me how to add a cursor theme for the system in Vanilla OS (avoid abroot when possible).
 
 <br />
 
