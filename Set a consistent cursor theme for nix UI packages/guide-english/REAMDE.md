@@ -14,26 +14,32 @@ Table of contents:
 1. [Acknowledgments](#acknowledgments)
 1. [References](#references)
 
-Some aspects to know before reading or following this guide:
+<br />
+
+These are some aspects to know before reading this guide:
 - All these steps has been tested in an "out of the box" Vanilla OS installation.
 - As I just mentioned, I'm using Vanilla OS, so some parts might be different or not necessary to do in other Linux distros. This parts are marked with `(specific to Vanilla OS)`.
 - Some paths contain `[your-user-name]`, so you should change that part with the user name that you used to login on your system.
-    - For example, if I find the path `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case because `javimarsal` is my user name on my computer.
-- Other paths start with `~/` as `~/.local/share/icons`. The `~` symbol corresponds to `/home/[your-user-name]`.
+    - For example, if I find the path `/home/[your-user-name]` in this guide, I should change it by `/home/javimarsal` in my case, because `javimarsal` is the user name I'm using on my computer.
+- Other paths start with `~/` (as `~/.local/share/icons`). The `~` symbol corresponds to `/home/[your-user-name]`.
     - I think it is necessary to know, maybe you have learnt this right now!
-
-The most part of the configuration is done using the terminal, specifically "Console" (the terminal emulator from GNOME), this is completly valid and the default one on Vanilla OS. So, keep your terminal opened and let's start with this guide!
 - If you already had initialized Nix, you can start following this guide from the ["Installing Home Manager"](#installing-home-manager) section.
 - And if you also had installed Home Manager, you can jump into the ["Setting cursor theme for Nix apps"](#setting-cursor-theme-for-nix-apps) section directly.
 - If you didn't perform any of the previous, start reading this guide from the beginning.
 
+The most configuration is done using the terminal, specifically "Console", this is completly valid and the default one on Vanilla OS and GNOME.
+
+Finally, I recommend reading this guide, in its entirety, before following the steps. In that way, you will realize if it fits your needs.
+
 <br />
 
-<!-- TODO: complete this section -->
 ## Why this guide?
 
-Utilizar Nix, en ocasiones, es algo necesario en Vanilla OS si no quieres modificar el sistema ejecutando [abroot](https://documentation.vanillaos.org/docs/ABRoot/).
+In some cases, installing a Nix app is the best choice to avoid installing the same app using [abroot](https://documentation.vanillaos.org/docs/ABRoot/) on Vanilla OS. Some of these apps must be used with an UI (User Interface) and it may be integrated with the system perfectly, but some apps may not. I mean, the app works as intended, but the cursor theme is not the same as the system one.
 
+For that reason, I wanted to solve this visual problem, and I found a solution that works! So, if you want the same cursor theme for Nix apps and the system, follow this guide and you will learn how to do it.
+
+<br />
 
 ## Initializing Nix (specific to Vanilla OS)
 
