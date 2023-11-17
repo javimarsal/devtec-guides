@@ -2,7 +2,8 @@
 
 (leer esta guía en Español 🇪🇸)
 
-Table of contents:
+<a id="table-of-contents">Table of contents:</a>
+
 1. [Why this guide?](#why-this-guide)
 1. [Initializing Nix (specific to Vanilla OS)](#initializing-nix-specific-to-vanilla-os)
 1. [Installing Home Manager](#installing-home-manager)
@@ -33,6 +34,8 @@ Finally, I recommend reading this guide, in its entirety, before following the s
 
 <br />
 
+#### [(back to index)](#table-of-contents)
+
 ## Why this guide?
 
 In some cases, installing a Nix app is the best choice to avoid installing the same app using [abroot](https://documentation.vanillaos.org/docs/ABRoot/) on Vanilla OS. Some of these apps must be used with an UI (User Interface) and it may be integrated with the system perfectly, but some apps may not. I mean, the app works as intended, but the cursor theme is not the same as the system one.
@@ -40,6 +43,8 @@ In some cases, installing a Nix app is the best choice to avoid installing the s
 For that reason, I wanted to solve this visual problem, and I found a solution that works! So, if you want the same cursor theme for Nix apps and the system, follow this guide and you will learn how to do it.
 
 <br />
+
+#### [(back to index)](#table-of-contents)
 
 ## Initializing Nix (specific to Vanilla OS)
 
@@ -54,6 +59,8 @@ This will request your password, and after that a message will appear letting yo
 When the installation has finished, it is necessary to reboot in order to apply all changes in the future partition (a Vanilla OS feature).
 
 <br />
+
+#### [(back to index)](#table-of-contents)
 
 ## Installing Home Manager
 
@@ -83,6 +90,8 @@ Don't worry about some red text, this is just some warnings of Nix (due to `opti
 After installing Home Manager, we can use this tool to set the cursor theme for Nix apps. In the next section we will use the `home-manager edit` command to achieve that.
 
 <br />
+
+#### [(back to index)](#table-of-contents)
 
 ## Setting a cursor theme for Nix apps
 
@@ -154,6 +163,8 @@ Taking into account:
 - If any application shows the cursor in a different size than the normal one, just reboot your system. That should fixed the correct size and now everything should look nice!
 
 <br />
+
+#### [(back to index)](#table-of-contents)
 
 ## Setting another theme (different from the system default one) for Nix and system
 
@@ -243,6 +254,8 @@ There you go! 👏 you have just change the cursor theme for both parts, Nix and
 
 <br />
 
+#### [(back to index)](#table-of-contents)
+
 ## Conclusion
 
 After applying this configuration, now we get a consistent cursor theme.
@@ -257,6 +270,8 @@ If you are using apt containers on Vanilla OS, you need to know that some apps u
 
 <br />
 
+#### [(back to index)](#table-of-contents)
+
 ## Acknowledgments
 
 Some parts of this guide wouldn't be possible without the help of the [Vanilla OS Discord Community](https://discord.gg/vanilla-os-1023243680829681704), so I would like to thank:
@@ -265,6 +280,8 @@ Some parts of this guide wouldn't be possible without the help of the [Vanilla O
 - "Monster" and Pulkit Krishna for showing me how to add a cursor theme for the system in Vanilla OS (avoid abroot when possible).
 
 <br />
+
+#### [(back to index)](#table-of-contents)
 
 ## References
 
