@@ -230,7 +230,6 @@ Now, with your terminal, go to the path where you extracted the cursor theme `.t
 cp -r ./Bibata-Modern-Ice ~/.local/share/icons
 ```
 
-<!-- por aquí -->
 With that, the cursor theme has been added to the system, but we need to set it. In order to do that, we will use the "gnome-tweaks" app, but we have to install it first (if you didn't before). In Vanilla OS you can follow these steps.
 
 So, let's install "gnome-tweaks" from Nix repository.
@@ -260,11 +259,18 @@ There you go! 👏 you have just change the cursor theme for both parts, Nix and
 
 After applying this configuration, now we get a consistent cursor theme.
 
-We have learnt how to install and use Home Manager for this specific configuration, but it can be used for other different settings.
+We have learnt about Home Manager and GNOME Tweaks for this specific configuration, but they can be used for different settings, for example:
 
-If you are using apt containers on Vanilla OS, you need to know that some apps use a different cursor theme and we are not able to configure it. So, this is something that I will check with the new version of Vanilla OS (Orchid) and I will update this guide as soon as it is released.
+- We can configure the **Home Manager** file in order to set a list of applications to install. It is a more comfortable way for managing apps, and you can replicate this configuration if you move or copy the file content to a different machine.
+- With every update of the GNOME desktop, we can find more additions to the system configuration. But some of them are not possible to change unless we use **GNOME Tweaks** (if we don't want to do it via terminal), like managing startup applications, changing system fonts or customizing mouse actions.
 
-<!-- Let me know if you think this guide is useful, you had any dificulty, or something is not working properly. I could improve this guide with your feedback 😉 -->
+As we mentioned at the beginning, we have used Vanilla OS alongside Nix because they are the main pillars of this guide. The developers of Vanilla OS are focusing on immutability, so they achive that with read-only system files (alongside with other functionalities and tool) and we are respecting that porpouse while using Nix. You can learn more about Vanilla OS [here](https://vanillaos.org/).
+
+If you want to set a cursor theme that is different to the ones seen on this guide, you can do it. The process will be the same, just look for the correct cursor package at the [Nix repository list](https://search.nixos.org/packages). And when you download a cursor theme zip (or .tar.gz), look for the folder the contains the "cursors" subfolder.
+
+Finally, and just to let you know, if you are using containers on Vanilla OS, some **apt** apps use a different cursor theme and we are not able to configure it. So, this is something that I will check in newer versions of Vanilla OS (Orchid) and I will update this guide as soon as it is fixed.
+
+<!-- Let me know if you think this guide is useful, you had any dificulty, or something is not working properly. I would improve this guide with your feedback 😉 -->
 
 <!-- Si te gustó esta guía no dudes en dejar un comentario. También me gustaría saber si has tenido alguna dificultad, no entiendes algo o no te funciona. Así podré mejorar esta guía 😉 -->
 
